@@ -1,0 +1,3 @@
+[submodule "stm32-rtos-minimal/third-party/FreeRTOS-Kernel"]
+	path = stm32-rtos-minimal/third-party/FreeRTOS-Kernel
+	url = git@github.com:FreeRTOS/FreeRTOS-Kernel.git
