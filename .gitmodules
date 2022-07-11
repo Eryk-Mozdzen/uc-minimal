@@ -1,3 +1,9 @@
 [submodule "stm32-rtos-minimal/third-party/FreeRTOS-Kernel"]
 	path = stm32-rtos-minimal/third-party/FreeRTOS-Kernel
 	url = git@github.com:FreeRTOS/FreeRTOS-Kernel.git
+[submodule "stm32-hal-rtos-minimal/third-party/STM32CubeF4"]
+	path = stm32-hal-rtos-minimal/third-party/STM32CubeF4
+	url = git@github.com:STMicroelectronics/STM32CubeF4.git
+[submodule "stm32-hal-rtos-minimal/third-party/FreeRTOS-Kernel"]
+	path = stm32-hal-rtos-minimal/third-party/FreeRTOS-Kernel
+	url = git@github.com:FreeRTOS/FreeRTOS-Kernel.git
