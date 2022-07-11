@@ -15,6 +15,10 @@ void vApplicationStackOverflowHook(TaskHandle_t pxTask, char *pcTaskName) {
 	while(1);
 }
 
+void vApplicationTickHook() {
+	HAL_IncTick();
+}
+
 void vApplicationGetIdleTaskMemory(StaticTask_t **ppxIdleTaskTCBBuffer, StackType_t **ppxIdleTaskStackBuffer, uint32_t *pulIdleTaskStackSize) {
     static StaticTask_t xIdleTaskTCB;
     static StackType_t uxIdleTaskStack[configMINIMAL_STACK_SIZE];
@@ -71,7 +75,7 @@ void led_task(void *param) {
 int main() {
 
     clock_init();
-    NVIC_SetPriorityGrouping(0);
+	HAL_NVIC_SetPriorityGrouping(NVIC_PRIORITYGROUP_4);
 
     xTaskCreate(led_task, "led", 1024, NULL, 4, NULL);
 
