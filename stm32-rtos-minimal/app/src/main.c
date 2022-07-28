@@ -47,19 +47,19 @@ void clock_init() {
     while((RCC->CFGR & RCC_CFGR_SW)!=RCC_CFGR_SW_PLL);
 }
 
-void led_task(void *param) {
+void blink(void *param) {
     (void)param;
 
     // PA5
     RCC->AHB1ENR |=RCC_AHB1ENR_GPIOAEN;
-    GPIOA->MODER |=GPIO_MODER_MODER5_0;
+    GPIOA->MODER |=(1<<GPIO_MODER_MODER5_Pos);
 
     while(1) {
         GPIOA->BSRR |=GPIO_BSRR_BS5;
-        vTaskDelay(500);
+        vTaskDelay(1000);
         
         GPIOA->BSRR |=GPIO_BSRR_BR5;
-        vTaskDelay(500);
+        vTaskDelay(1000);
     }
 }
 
@@ -68,7 +68,7 @@ int main() {
     clock_init();
     NVIC_SetPriorityGrouping(0);
 
-    xTaskCreate(led_task, "led", 1024, NULL, 4, NULL);
+    xTaskCreate(blink, "blink", 1024, NULL, 4, NULL);
 
     vTaskStartScheduler();
 
