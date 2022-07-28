@@ -27,7 +27,7 @@ add_executable(${TARGET}
 	"third-party/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c"
 	"third-party/FreeRTOS-Kernel/portable/MemMang/heap_4.c"
 
-	"code/src/main.c"
+	"app/src/main.c"
 )
 
 target_compile_definitions(${TARGET} PRIVATE
@@ -44,9 +44,8 @@ target_include_directories(${TARGET} PRIVATE
 	"third-party/FreeRTOS-Kernel/include"
 	"third-party/FreeRTOS-Kernel/portable/GCC/ARM_CM4F"
 	
-	"code/inc"
+	"app/inc"
 )
-
 
 target_compile_options(${TARGET} PRIVATE
 	-O0 -g

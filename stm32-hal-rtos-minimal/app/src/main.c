@@ -50,7 +50,7 @@ void clock_init() {
 	HAL_RCC_ClockConfig(&clock, FLASH_LATENCY_2);
 }
 
-void led_task(void *param) {
+void blink(void *param) {
     (void)param;
 
     // PA5
@@ -77,7 +77,7 @@ int main() {
     clock_init();
 	HAL_NVIC_SetPriorityGrouping(NVIC_PRIORITYGROUP_4);
 
-    xTaskCreate(led_task, "led", 1024, NULL, 4, NULL);
+    xTaskCreate(blink, "blink", 1024, NULL, 4, NULL);
 
     vTaskStartScheduler();
 
