@@ -1,7 +1,6 @@
-#include <stdint.h>
 #include "stm32f4xx.h"
 
-void Clock_Init() {
+void clock_init() {
     RCC->CR |=RCC_CR_HSION;
     while(!(RCC->CR & RCC_CR_HSIRDY));
 
@@ -25,13 +24,12 @@ void Clock_Init() {
 }
 
 int main() {
-    
-    NVIC_SetPriorityGrouping(0);
-    Clock_Init();
+
+    clock_init();
 
     // PA5
     RCC->AHB1ENR |=RCC_AHB1ENR_GPIOAEN;
-    GPIOA->MODER |=GPIO_MODER_MODER5_0;
+	GPIOA->MODER |=(1<<GPIO_MODER_MODER5_Pos);
 
     while(1) {
         GPIOA->BSRR |=GPIO_BSRR_BS5;

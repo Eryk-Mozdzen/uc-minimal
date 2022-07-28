@@ -9,9 +9,10 @@ enable_language(C ASM)
 set(TARGET ${CMAKE_PROJECT_NAME}.elf)
 
 add_executable(${TARGET}
-	"startup/startup_stm32f411xe.s"
+	"third-party/CMSIS/Device/ST/STM32F4xx/Source/Templates/gcc/startup_stm32f411xe.s"
+	"third-party/CMSIS/Device/ST/STM32F4xx/Source/Templates/system_stm32f4xx.c"
 
-	"code/src/main.c"
+	"app/src/main.c"
 )
 
 target_compile_definitions(${TARGET} PRIVATE
@@ -22,7 +23,7 @@ target_include_directories(${TARGET} PRIVATE
 	"third-party/CMSIS/Include"
 	"third-party/CMSIS/Device/ST/STM32F4xx/Include"
 	
-	"code/inc"
+	"app/inc"
 )
 
 
