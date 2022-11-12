@@ -29,8 +29,6 @@ add_executable(${TARGET}
 	"third-party/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c"
 	"third-party/FreeRTOS-Kernel/portable/MemMang/heap_4.c"
 
-	"app/src/stm32f4xx_it.c"
-	"app/src/stm32f4xx_hal_timebase_tim.c"
 	"app/src/main.c"
 )
 

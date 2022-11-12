@@ -2,6 +2,34 @@
 #include "FreeRTOS.h"
 #include "task.h"
 
+TIM_HandleTypeDef htim11;
+
+HAL_StatusTypeDef HAL_InitTick(uint32_t TickPriority) {
+	
+	const uint32_t uwTimclock = HAL_RCC_GetPCLK2Freq();
+	const uint32_t uwPrescalerValue = (uwTimclock/1000000) - 1;
+	
+	__HAL_RCC_TIM11_CLK_ENABLE();
+
+	htim11.Instance = TIM11;
+	htim11.Init.Period = 999;
+	htim11.Init.Prescaler = uwPrescalerValue;
+	htim11.Init.ClockDivision = 0;
+	htim11.Init.CounterMode = TIM_COUNTERMODE_UP;
+
+	if(HAL_TIM_Base_Init(&htim11)!=HAL_OK)
+		return HAL_ERROR;
+		
+	HAL_NVIC_SetPriority(TIM1_TRG_COM_TIM11_IRQn, TickPriority ,0);
+	HAL_NVIC_EnableIRQ(TIM1_TRG_COM_TIM11_IRQn);
+
+	return HAL_TIM_Base_Start_IT(&htim11);
+}
+
+void TIM1_TRG_COM_TIM11_IRQHandler() {
+	HAL_TIM_IRQHandler(&htim11);
+}
+
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 	if(htim->Instance==TIM11) {
 		HAL_IncTick();
@@ -34,7 +62,7 @@ void blink(void *param) {
 int main() {
 
 	HAL_Init();
-	
+
 	RCC_OscInitTypeDef oscillator = {
 		.OscillatorType = RCC_OSCILLATORTYPE_HSI,
 		.HSIState = RCC_HSI_ON,
@@ -58,9 +86,9 @@ int main() {
 	HAL_RCC_OscConfig(&oscillator);
 	HAL_RCC_ClockConfig(&clock, FLASH_LATENCY_2);
 
-    xTaskCreate(blink, "blink", 1024, NULL, 4, NULL);
+	xTaskCreate(blink, "blink", 1024, NULL, 4, NULL);
 
-    vTaskStartScheduler();
+	vTaskStartScheduler();
 
-    return 0;
+	return 0;
 }
