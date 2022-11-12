@@ -2,65 +2,15 @@
 #include "FreeRTOS.h"
 #include "task.h"
 
-void vApplicationMallocFailedHook() {
-    taskDISABLE_INTERRUPTS();
-    while(1);
-}
-
-void vApplicationStackOverflowHook(TaskHandle_t pxTask, char *pcTaskName) {
-	(void)pcTaskName;
-	(void)pxTask;
-
-	taskDISABLE_INTERRUPTS();
-	while(1);
-}
-
-void vApplicationGetIdleTaskMemory(StaticTask_t **ppxIdleTaskTCBBuffer, StackType_t **ppxIdleTaskStackBuffer, uint32_t *pulIdleTaskStackSize) {
-    static StaticTask_t xIdleTaskTCB;
-    static StackType_t uxIdleTaskStack[configMINIMAL_STACK_SIZE];
-
-    *ppxIdleTaskTCBBuffer = &xIdleTaskTCB;
-    *ppxIdleTaskStackBuffer = uxIdleTaskStack;
-    *pulIdleTaskStackSize = configMINIMAL_STACK_SIZE;
-}
-
-void vApplicationTickHook() {
-	HAL_IncTick();
-}
-
-void clock_init() {
-	__HAL_RCC_PWR_CLK_ENABLE();
-	__HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
-
-	RCC_OscInitTypeDef oscillator = {
-		.OscillatorType = RCC_OSCILLATORTYPE_HSI,
-		.HSIState = RCC_HSI_ON,
-		.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT,
-		.PLL.PLLState = RCC_PLL_ON,
-		.PLL.PLLSource = RCC_PLLSOURCE_HSI,
-		.PLL.PLLM = 8,
-		.PLL.PLLN = 100,
-		.PLL.PLLP = 2,
-		.PLL.PLLQ = 4
-	};
-
-	HAL_RCC_OscConfig(&oscillator);
-
-	RCC_ClkInitTypeDef clock = {
-		.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2,
-		.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK,
-		.AHBCLKDivider = RCC_SYSCLK_DIV1,
-		.APB1CLKDivider = RCC_HCLK_DIV2,
-		.APB2CLKDivider = RCC_HCLK_DIV1
-	};
-
-	HAL_RCC_ClockConfig(&clock, FLASH_LATENCY_2);
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
+	if(htim->Instance==TIM11) {
+		HAL_IncTick();
+	}
 }
 
 void blink(void *param) {
     (void)param;
 
-    // PA5
 	__HAL_RCC_GPIOA_CLK_ENABLE();
 
 	GPIO_InitTypeDef led = {
@@ -84,8 +34,29 @@ void blink(void *param) {
 int main() {
 
 	HAL_Init();
+	
+	RCC_OscInitTypeDef oscillator = {
+		.OscillatorType = RCC_OSCILLATORTYPE_HSI,
+		.HSIState = RCC_HSI_ON,
+		.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT,
+		.PLL.PLLState = RCC_PLL_ON,
+		.PLL.PLLSource = RCC_PLLSOURCE_HSI,
+		.PLL.PLLM = 8,
+		.PLL.PLLN = 100,
+		.PLL.PLLP = RCC_PLLP_DIV2,
+		.PLL.PLLQ = 4
+	};
 
-    clock_init();
+	RCC_ClkInitTypeDef clock = {
+		.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2,
+		.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK,
+		.AHBCLKDivider = RCC_SYSCLK_DIV1,
+		.APB1CLKDivider = RCC_HCLK_DIV2,
+		.APB2CLKDivider = RCC_HCLK_DIV1
+	};
+
+	HAL_RCC_OscConfig(&oscillator);
+	HAL_RCC_ClockConfig(&clock, FLASH_LATENCY_2);
 
     xTaskCreate(blink, "blink", 1024, NULL, 4, NULL);
 

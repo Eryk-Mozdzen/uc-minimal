@@ -15,6 +15,9 @@ add_executable(${TARGET}
 	"third-party/stm32f4xx_hal_driver/Src/stm32f4xx_hal_gpio.c"
 	"third-party/stm32f4xx_hal_driver/Src/stm32f4xx_hal_rcc.c"
 	"third-party/stm32f4xx_hal_driver/Src/stm32f4xx_hal_pwr.c"
+	"third-party/stm32f4xx_hal_driver/Src/stm32f4xx_hal_dma.c"
+	"third-party/stm32f4xx_hal_driver/Src/stm32f4xx_hal_tim.c"
+	"third-party/stm32f4xx_hal_driver/Src/stm32f4xx_hal_tim_ex.c"
 	"third-party/stm32f4xx_hal_driver/Src/stm32f4xx_hal_flash.c"
 	"third-party/stm32f4xx_hal_driver/Src/stm32f4xx_hal_flash_ex.c"
 	"third-party/stm32f4xx_hal_driver/Src/stm32f4xx_hal_cortex.c"
@@ -26,6 +29,8 @@ add_executable(${TARGET}
 	"third-party/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/port.c"
 	"third-party/FreeRTOS-Kernel/portable/MemMang/heap_4.c"
 
+	"app/src/stm32f4xx_it.c"
+	"app/src/stm32f4xx_hal_timebase_tim.c"
 	"app/src/main.c"
 )
 
