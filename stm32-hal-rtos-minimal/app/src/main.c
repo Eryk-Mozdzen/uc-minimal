@@ -19,8 +19,8 @@ HAL_StatusTypeDef HAL_InitTick(uint32_t TickPriority) {
 
 	if(HAL_TIM_Base_Init(&htim11)!=HAL_OK)
 		return HAL_ERROR;
-		
-	HAL_NVIC_SetPriority(TIM1_TRG_COM_TIM11_IRQn, TickPriority ,0);
+	
+	HAL_NVIC_SetPriority(TIM1_TRG_COM_TIM11_IRQn, TickPriority, 0);
 	HAL_NVIC_EnableIRQ(TIM1_TRG_COM_TIM11_IRQn);
 
 	return HAL_TIM_Base_Start_IT(&htim11);
@@ -37,7 +37,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 }
 
 void blink(void *param) {
-    (void)param;
+	(void)param;
 
 	__HAL_RCC_GPIOA_CLK_ENABLE();
 
@@ -50,13 +50,13 @@ void blink(void *param) {
 
 	HAL_GPIO_Init(GPIOA, &led);
 
-    while(1) {
+	while(1) {
 		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
-        vTaskDelay(1000);
+		vTaskDelay(1000);
 
-        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
-        vTaskDelay(1000);
-    }
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
+		vTaskDelay(1000);
+	}
 }
 
 int main() {
