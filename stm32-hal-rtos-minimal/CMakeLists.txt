@@ -9,8 +9,8 @@ enable_language(C ASM)
 set(TARGET ${CMAKE_PROJECT_NAME}.elf)
 
 add_executable(${TARGET}
-	"third-party/CMSIS/Device/ST/STM32F4xx/Source/Templates/system_stm32f4xx.c"
-	"third-party/CMSIS/Device/ST/STM32F4xx/Source/Templates/gcc/startup_stm32f411xe.s"
+	"third-party/cmsis_device_f4/Source/Templates/system_stm32f4xx.c"
+	"third-party/cmsis_device_f4/Source/Templates/gcc/startup_stm32f411xe.s"
 
 	"third-party/stm32f4xx_hal_driver/Src/stm32f4xx_hal_gpio.c"
 	"third-party/stm32f4xx_hal_driver/Src/stm32f4xx_hal_rcc.c"
@@ -36,9 +36,9 @@ target_compile_definitions(${TARGET} PRIVATE
 )
 
 target_include_directories(${TARGET} PRIVATE
-	"third-party/CMSIS/Include"
-	"third-party/CMSIS/Device/ST/STM32F4xx/Include"
-
+	"third-party/cmsis_core/Include"
+	"third-party/cmsis_device_f4/Include"
+	
 	"third-party/stm32f4xx_hal_driver/Inc"
 
 	"third-party/FreeRTOS-Kernel/include"
