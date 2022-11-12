@@ -14,7 +14,6 @@ add_executable(${TARGET}
 
 	"third-party/stm32f4xx_hal_driver/Src/stm32f4xx_hal_gpio.c"
 	"third-party/stm32f4xx_hal_driver/Src/stm32f4xx_hal_rcc.c"
-	"third-party/stm32f4xx_hal_driver/Src/stm32f4xx_hal_dma.c"
 	"third-party/stm32f4xx_hal_driver/Src/stm32f4xx_hal_pwr.c"
 	"third-party/stm32f4xx_hal_driver/Src/stm32f4xx_hal_flash.c"
 	"third-party/stm32f4xx_hal_driver/Src/stm32f4xx_hal_flash_ex.c"
@@ -38,7 +37,6 @@ target_compile_definitions(${TARGET} PRIVATE
 target_include_directories(${TARGET} PRIVATE
 	"third-party/cmsis_core/Include"
 	"third-party/cmsis_device_f4/Include"
-	
 	"third-party/stm32f4xx_hal_driver/Inc"
 
 	"third-party/FreeRTOS-Kernel/include"
@@ -48,9 +46,9 @@ target_include_directories(${TARGET} PRIVATE
 )
 
 target_compile_options(${TARGET} PRIVATE
-	-O0 -g
+	-O0
+	-g
 	
-	#-Wall
 	-Wextra
 	-Wpedantic
 	-Wdouble-promotion

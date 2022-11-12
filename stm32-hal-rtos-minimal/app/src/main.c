@@ -73,7 +73,7 @@ void blink(void *param) {
     while(1) {
 		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
         vTaskDelay(1000);
-        
+
         HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
         vTaskDelay(1000);
     }
@@ -81,8 +81,9 @@ void blink(void *param) {
 
 int main() {
 
+	HAL_Init();
+
     clock_init();
-	HAL_NVIC_SetPriorityGrouping(NVIC_PRIORITYGROUP_4);
 
     xTaskCreate(blink, "blink", 1024, NULL, 4, NULL);
 
