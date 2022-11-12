@@ -63,11 +63,13 @@ void blink(void *param) {
     // PA5
 	__HAL_RCC_GPIOA_CLK_ENABLE();
 
-	GPIO_InitTypeDef led = {0};
-	led.Pin = GPIO_PIN_5;
-	led.Mode = GPIO_MODE_OUTPUT_PP;
-	led.Pull = GPIO_NOPULL;
-	led.Speed = GPIO_SPEED_FREQ_LOW;
+	GPIO_InitTypeDef led = {
+		.Pin = GPIO_PIN_5,
+		.Mode = GPIO_MODE_OUTPUT_PP,
+		.Pull = GPIO_NOPULL,
+		.Speed = GPIO_SPEED_FREQ_LOW
+	};
+
 	HAL_GPIO_Init(GPIOA, &led);
 
     while(1) {
