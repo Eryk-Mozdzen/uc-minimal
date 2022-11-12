@@ -12,14 +12,14 @@ add_executable(${TARGET}
 	"third-party/CMSIS/Device/ST/STM32F4xx/Source/Templates/system_stm32f4xx.c"
 	"third-party/CMSIS/Device/ST/STM32F4xx/Source/Templates/gcc/startup_stm32f411xe.s"
 
-	"third-party/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c"
-	"third-party/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c"
-	"third-party/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c"
-	"third-party/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c"
-	"third-party/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c"
-	"third-party/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c"
-	"third-party/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c"
-	"third-party/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c"
+	"third-party/stm32f4xx_hal_driver/Src/stm32f4xx_hal_gpio.c"
+	"third-party/stm32f4xx_hal_driver/Src/stm32f4xx_hal_rcc.c"
+	"third-party/stm32f4xx_hal_driver/Src/stm32f4xx_hal_dma.c"
+	"third-party/stm32f4xx_hal_driver/Src/stm32f4xx_hal_pwr.c"
+	"third-party/stm32f4xx_hal_driver/Src/stm32f4xx_hal_flash.c"
+	"third-party/stm32f4xx_hal_driver/Src/stm32f4xx_hal_flash_ex.c"
+	"third-party/stm32f4xx_hal_driver/Src/stm32f4xx_hal_cortex.c"
+	"third-party/stm32f4xx_hal_driver/Src/stm32f4xx_hal.c"
 
 	"third-party/FreeRTOS-Kernel/tasks.c"
 	"third-party/FreeRTOS-Kernel/queue.c"
@@ -39,7 +39,7 @@ target_include_directories(${TARGET} PRIVATE
 	"third-party/CMSIS/Include"
 	"third-party/CMSIS/Device/ST/STM32F4xx/Include"
 
-	"third-party/STM32F4xx_HAL_Driver/Inc"
+	"third-party/stm32f4xx_hal_driver/Inc"
 
 	"third-party/FreeRTOS-Kernel/include"
 	"third-party/FreeRTOS-Kernel/portable/GCC/ARM_CM4F"
