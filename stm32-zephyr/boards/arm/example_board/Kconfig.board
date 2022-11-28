@@ -1,0 +1,4 @@
+
+config BOARD_EXAMPLE_BOARD
+	bool "My example board"
+	depends on SOC_STM32F411XE
