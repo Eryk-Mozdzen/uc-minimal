@@ -13,3 +13,9 @@
 [submodule "stm32-hal-rtos-minimal/third-party/cmsis_core"]
 	path = stm32-hal-rtos-minimal/third-party/cmsis_core
 	url = git@github.com:STMicroelectronics/cmsis_core.git
+[submodule "stm32-c/cmsis_core"]
+	path = stm32-c/cmsis_core
+	url = git@github.com:STMicroelectronics/cmsis_core.git
+[submodule "stm32-c/cmsis_device_f4"]
+	path = stm32-c/cmsis_device_f4
+	url = git@github.com:STMicroelectronics/cmsis_device_f4.git
