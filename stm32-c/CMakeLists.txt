@@ -54,7 +54,7 @@ target_compile_options(${TARGET} PRIVATE
 )
 
 target_link_options(${TARGET} PRIVATE
-	-T ${CMAKE_SOURCE_DIR}/STM32F411RETX_FLASH.ld
+	-T ${CMAKE_SOURCE_DIR}/linker.ld
 	-Wl,-Map=${CMAKE_PROJECT_NAME}.map
 	-Wl,--gc-sections
 	-Wl,-cref
