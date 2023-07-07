@@ -5,3 +5,9 @@
 **/CMSIS/docs
 
 **/sdkconfig.old
+
+**/.west
+**/*-zephyr/bootloader
+**/*-zephyr/modules
+**/*-zephyr/tools
+**/*-zephyr/zephyr
