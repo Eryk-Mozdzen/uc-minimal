@@ -3,7 +3,6 @@
 #include "driver/gpio.h"
 
 static void blink(void *param) {
-	(void)param;
 
 	gpio_config_t led = {
 		.pin_bit_mask = GPIO_Pin_2,
@@ -16,7 +15,6 @@ static void blink(void *param) {
 	gpio_config(&led);
 
 	while(1) {
-
 		gpio_set_level(GPIO_NUM_2, 1);
 		vTaskDelay(100);
 
@@ -26,6 +24,6 @@ static void blink(void *param) {
 }
 
 void app_main() {
-	
+
 	xTaskCreate(blink, "blink", 3000, NULL, 5, NULL);
 }
