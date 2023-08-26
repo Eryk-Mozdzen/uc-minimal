@@ -1,0 +1,15 @@
+[package]
+name = "stm32-rust-hal"
+version = "0.1.0"
+edition = "2021"
+
+[profile.release]
+opt-level = 'z'
+lto = true
+
+[dependencies]
+cortex-m = "^0.7.3"
+cortex-m-rt = "^0.6.12"
+stm32f4 = "0.11.0"
+stm32f4xx-hal = { version = "^0.8.2", features = ["stm32f411", "rt"] }
+panic-halt = "^0.2.0"

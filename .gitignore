@@ -1,5 +1,4 @@
 
-
 **/build
 **/.vscode
 **/CMSIS/docs
@@ -11,3 +10,6 @@
 **/*-zephyr/modules
 **/*-zephyr/tools
 **/*-zephyr/zephyr
+
+**/target
+**/Cargo.lock
